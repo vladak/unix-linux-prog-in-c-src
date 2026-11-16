@@ -46,6 +46,11 @@ main(void)
 	case -1:
 		err(1, "fork");
 	case 0:
+		/*
+		 * Note that this is subject to races. Ideally the signal mask
+		 * should be changed prior to fork and handler setup post fork,
+		 * with the mask reverted to the original state.
+		 */
 		printf("%d: this is a child\n", getpid());
 		sigemptyset(&set);
 		sigaddset(&set, SIGUSR1);
