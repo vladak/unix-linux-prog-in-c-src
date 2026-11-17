@@ -1,6 +1,11 @@
 PROGS=libmy dlopen
 
-ifeq ($(UNAME_S),Linux)
+#
+# Assumes GNU make. Cannot use $(UNAME_S) at this point since Makefile.common
+# is not included at this point and cannot be since it contains a target
+# which would be considered default and would override the 'all' target below.
+#
+ifeq ($(shell uname -s),Linux)
   PROGS+=ld-lazy
   PROGS+=myread.so
 endif

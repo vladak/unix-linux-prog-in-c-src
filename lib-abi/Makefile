@@ -1,5 +1,9 @@
-# Assumes GNU make.
-ifeq ($(UNAME_S),Darwin)
+#
+# Assumes GNU make. Cannot use $(UNAME_S) at this point since Makefile.common
+# is not included at this point and cannot be since it contains a target
+# which would be considered default and would override the 'all' target below.
+#
+ifeq ($(shell uname -s),Darwin)
 PROGS=
 else
 PROGS=abi-main-32 abi-main-64
